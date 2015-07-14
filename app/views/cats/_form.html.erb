@@ -1,0 +1,31 @@
+<label for="cat_name">Name</label>
+<input type="text" name="cat[name]" id="cat_name" value= <%= @cat.name %> >
+<br>
+
+<label for="cat_color">Color</label>
+<select name="cat[color]" id="cat_color">
+  <option value="choose_color" <%= @cat.color == "choose_color" ? "selected" : "" %> >choose color</option>
+  <option value="white" <%= @cat.color == "white" ? "selected" : "" %> >WHITE</option>
+  <option value="black" <%= @cat.color == "black" ? "selected" : "" %> >BLACK</option>
+  <option value="brown" <%= @cat.color == "brown" ? "selected" : "" %> >BROWN</option>
+  <option value="grey" <%= @cat.color == "grey" ? "selected" : "" %> >GREY</option>
+  <option value="tabby" <%= @cat.color == "tabby" ? "selected" : "" %> >TABBY</option>
+  <option value="tortiseshell" <%= @cat.color == "tortiseshell" ? "selected" : "" %> >TORTOISESHELL</option>
+  <option value="other" <%= @cat.color == "other" ? "selected" : "" %> >OTHER</option>
+</select>
+<br>
+
+<label for="cat_sex_female">Female</label>
+<input type="radio" name="cat[sex]" id="cat_sex_female" value="F" <%= @cat.sex == "F" ? "checked" : "" %>>
+<label for="cat_sex_male">Male</label>
+<input type="radio" name="cat[sex]" id="cat_sex_male" value="M" <%= @cat.sex == "M" ? "checked" : "" %> >
+<br>
+
+<input type="date" name="cat[birth_date]" value = <%= @cat.birth_date %>>
+<br>
+
+<label for="cat_biography">Description Of Cat</label>
+<textarea name="cat[description]" id="cat_description" > <%= @cat.description %> </textarea>
+<br>
+
+<input type="submit" value="Create cat">
