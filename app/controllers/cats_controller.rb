@@ -1,6 +1,5 @@
 class CatsController < ApplicationController
 
-
   def index
     @cats = Cat.all
     render :index
@@ -8,6 +7,7 @@ class CatsController < ApplicationController
 
   def show
     @cat = Cat.find_by_id(params[:id])
+    @requests = @cat.cat_rental_requests.sort_by { |request| request.start_date}
     if @cat
       render :show
     else
@@ -16,16 +16,17 @@ class CatsController < ApplicationController
   end
 
   def new
-    @cat = Cat.new(name: "", birth_date: Date.today, color: "choose_color", sex: "U", description: "")
+    @cat = Cat.new
     render :new
   end
 
   def create
-    @cat = Cat.create!(cat_params)
-    if @cat
+    @cat = Cat.new(cat_params)
+    if @cat.save
+      @requests = @cat.cat_rental_requests.sort_by { |request| request.start_date}
       render :show
     else
-      render :index
+      render :new
     end
   end
 

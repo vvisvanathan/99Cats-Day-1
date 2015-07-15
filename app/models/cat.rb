@@ -14,7 +14,15 @@
 
 class Cat < ActiveRecord::Base
   validates :birth_date, :color, :name, :sex, :description, presence: true
-  validates :color, inclusion: %w(white black brown grey tabby tortiseshell other choose_color)
-  validates :sex, inclusion: %w(M F U)
+  validates :color, inclusion: %w(white black brown grey tabby tortiseshell other)
+  validates :sex, inclusion: %w(M F)
+
+  has_many(
+    :cat_rental_requests,
+    class_name: CatRentalRequest,
+    foreign_key: :cat_id,
+    primary_key: :id,
+    :dependent => :destroy
+  )
 
 end

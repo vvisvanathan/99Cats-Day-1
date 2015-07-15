@@ -31,5 +31,22 @@
 
   </table>
 
-   <%= link_to "<< return", "/cats" %>
+
+    <% @requests.each do |request| %>
+        <li>
+          From <%= request.start_date %> to  <%= request.end_date %>, <%= request.status.downcase %>
+          <% if request.pending? %>
+            <%= button_to "approve request", "#{cat_rental_request_url(request)}/approve", method: :get %>
+            <%= button_to "deny request", "#{cat_rental_request_url(request)}/deny", method: :get %>
+          <% end %>
+          <br>
+          <br>
+        </li>
+    <% end %>
+
+
+  <%= link_to "edit cat", edit_cat_url(@cat) %>
+  <br>
+  <%= link_to "<< return", cats_url %>
+
 </body>

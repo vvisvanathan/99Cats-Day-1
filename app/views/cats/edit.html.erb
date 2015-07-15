@@ -1,6 +1,6 @@
 <title> Edit A Cat! </title>
 
-<form action="/cats/6" method="post">
+<form action="/cats/<%= @cat.id %>" method="post">
 <input type="hidden" name="_method" value="PATCH">
-<%= render partial: 'form' %>
+<%= render 'form', cat: @cat %>
 </form>
