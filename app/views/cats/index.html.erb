@@ -6,12 +6,12 @@
   <ul>
     <% @cats.each do |cat| %>
     <li>
-      <%= cat.name %>
-      :
-      <%= link_to "More info", "/cats/#{cat.id}" %>
+      <%= link_to "#{cat.name}", cat_url(cat) %>
     </li>
     <% end %>
   </ul>
 
-  <%= link_to "Make new cat", "/cats/new" %>
+  <%= link_to "Make new cat", new_cat_url %>
+  <br>
+  <%= link_to "Make rental request", new_cat_rental_request_url %>
 </body>
