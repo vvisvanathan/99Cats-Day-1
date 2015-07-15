@@ -62,11 +62,13 @@ class CatRentalRequest < ActiveRecord::Base
 
   def overlapping_requests
     cat_dates = Cat.find_by_id(self.cat_id).cat_rental_requests
+    return [] unless self.end_date && self.start_date
     cat_dates.select do |cat_date|
       # TODO want variables not symbols
       self.id != cat_date.id &&
       (self.start_date.between?(cat_date.start_date, cat_date.end_date) ||
-      self.end_date.between?(cat_date.start_date, cat_date.end_date))
+      self.end_date.between?(cat_date.start_date, cat_date.end_date) ||
+      cat_date.end_date.between?(self.start_date, self.end_date))
     end
   end
 
@@ -75,7 +77,7 @@ class CatRentalRequest < ActiveRecord::Base
   end
 
   def no_overlapping_approved_requests
-    unless status != "APPROVED" || overlapping_approved_requests.empty?
+    unless overlapping_approved_requests.empty?
       errors[:start_date] << "overlapping approved requests!"
     end
   end
